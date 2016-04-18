@@ -28,5 +28,7 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
     
     override func rollback() {
         rollbacksCount += 1
+        fakeHasChanges = false
+        fakeHasChangesOnce = false
     }
 }
