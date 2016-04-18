@@ -22,7 +22,7 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
         return fakeHasChanges
     }
     
-    private var changedObjectsCount: Int {
+    override var changedObjectsCount: Int {
         return fakeInsertedObjectsCount + fakeUpdatedObjectsCount + fakeDeletedObjectsCount
     }
     
