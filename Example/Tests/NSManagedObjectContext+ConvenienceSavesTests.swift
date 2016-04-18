@@ -11,7 +11,45 @@ import BNRCoreDataStack
 import BNRCoreDataStackConvenienceSaves
 
 class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
-    func testShouldPass() {
-        XCTAssert(true)
+    var context: NSManagedObjectContextFake!
+    
+    override func setUp() {
+        super.setUp()
+        context = NSManagedObjectContextFake()
+    }
+    
+    override func tearDown() {
+        context = nil
+        super.tearDown()
+    }
+
+    func testShouldSave() {
+        context.shouldThrowOnSave = false
+        context.fakeHasChanges = true
+        do {
+            try context.saveOrRollback()
+        }
+        catch {
+            XCTFail("Error: \(error)")
+        }
+        XCTAssert(context.saveCallsCount == 1)
+        XCTAssert(context.savesCount == 1)
+        XCTAssert(context.rollbacksCount == 0)
+    }
+    
+    func testShouldRollbackOnError() {
+        context.shouldThrowOnSave = true
+        context.fakeHasChanges = true
+        var thrownError: ErrorType?
+        do {
+            try context.saveOrRollback()
+        }
+        catch {
+            thrownError = error
+        }
+        XCTAssertNotNil(thrownError)
+        XCTAssert(context.saveCallsCount == 1)
+        XCTAssert(context.savesCount == 0)
+        XCTAssert(context.rollbacksCount == 1)
     }
 }
