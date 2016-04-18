@@ -62,7 +62,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 XCTFail("Error: \($0)")
             })
         }
-        sleep(5) // TODO: WIP
+        sleep(1) // TODO: WIP
         XCTAssertEqual(self.context.saveCallsCount, 1)
         XCTAssertEqual(self.context.savesCount, 1)
         XCTAssertEqual(self.context.rollbacksCount, 0)

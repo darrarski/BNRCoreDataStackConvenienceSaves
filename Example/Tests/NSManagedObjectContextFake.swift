@@ -23,7 +23,6 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
             throw NSError(domain: "FakeError", code: 0, userInfo: nil)
         }
         savesCount += 1
-        sleep(1) // TODO: WIP
         fakeHasChangesOnce = false
     }
     
