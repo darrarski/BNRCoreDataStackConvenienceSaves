@@ -6,6 +6,7 @@ import CoreData
 
 class NSManagedObjectContextFake: NSManagedObjectContext {
     var fakeHasChanges = false
+    var fakeHasChangesOnce = false
     var shouldThrowOnSave = false
     
     private(set) var saveCallsCount = 0
@@ -13,7 +14,7 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
     private(set) var rollbacksCount = 0
     
     override var hasChanges: Bool {
-        return fakeHasChanges
+        return fakeHasChanges || fakeHasChangesOnce
     }
     
     override func save() throws {
@@ -23,6 +24,7 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
         }
         savesCount += 1
         sleep(1) // TODO: WIP
+        fakeHasChangesOnce = false
     }
     
     override func rollback() {
