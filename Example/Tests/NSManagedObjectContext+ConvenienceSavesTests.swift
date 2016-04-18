@@ -32,9 +32,9 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
         catch {
             XCTFail("Error: \(error)")
         }
-        XCTAssert(context.saveCallsCount == 1)
-        XCTAssert(context.savesCount == 1)
-        XCTAssert(context.rollbacksCount == 0)
+        XCTAssertEqual(context.saveCallsCount, 1)
+        XCTAssertEqual(context.savesCount, 1)
+        XCTAssertEqual(context.rollbacksCount, 0)
     }
     
     func testShouldRollbackOnError() {
@@ -48,8 +48,8 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
             thrownError = error
         }
         XCTAssertNotNil(thrownError)
-        XCTAssert(context.saveCallsCount == 1)
-        XCTAssert(context.savesCount == 0)
-        XCTAssert(context.rollbacksCount == 1)
+        XCTAssertEqual(context.saveCallsCount, 1)
+        XCTAssertEqual(context.savesCount, 0)
+        XCTAssertEqual(context.rollbacksCount, 1)
     }
 }
