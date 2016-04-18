@@ -11,7 +11,7 @@ import BNRCoreDataStack
 import BNRCoreDataStackConvenienceSaves
 
 class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
-    func testShouldFail() {
-        XCTFail("ok")
+    func testShouldPass() {
+        XCTAssert(true)
     }
 }
