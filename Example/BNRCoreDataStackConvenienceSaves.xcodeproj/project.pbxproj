@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		21A096D9BDF10E6387D887C6 /* Pods_BNRCoreDataStackConvenienceSaves_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C03E4D9F74CC5A6757466607 /* Pods_BNRCoreDataStackConvenienceSaves_Tests.framework */; };
+		313357E61CC574610004D2D6 /* CoreDataModelableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313357E51CC574610004D2D6 /* CoreDataModelableTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		313357E51CC574610004D2D6 /* CoreDataModelableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataModelableTests.swift; sourceTree = "<group>"; };
 		43CF6AD4B9DFD3CF599B9654 /* Pods-BNRCoreDataStackConvenienceSaves_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BNRCoreDataStackConvenienceSaves_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BNRCoreDataStackConvenienceSaves_Tests/Pods-BNRCoreDataStackConvenienceSaves_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		554C7BAA3430739F283BCA59 /* BNRCoreDataStackConvenienceSaves.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BNRCoreDataStackConvenienceSaves.podspec; path = ../BNRCoreDataStackConvenienceSaves.podspec; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* BNRCoreDataStackConvenienceSaves_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BNRCoreDataStackConvenienceSaves_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACE91AFB9204008FA782 /* Supporting Files */,
+				313357E51CC574610004D2D6 /* CoreDataModelableTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				313357E61CC574610004D2D6 /* CoreDataModelableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
