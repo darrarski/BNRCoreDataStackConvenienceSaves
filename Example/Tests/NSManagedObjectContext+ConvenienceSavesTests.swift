@@ -116,4 +116,22 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
         XCTAssertEqual(self.context.savesCount, 0)
         XCTAssertEqual(self.context.rollbacksCount, 2)
     }
+    
+    func testShouldThrowTwiceWithinGroup() {
+        context.shouldThrowOnSave = true
+        var thrownErrors = [ErrorType]()
+        let group = dispatch_group_create()
+        for _ in 1...1000 {
+            context.fakeInsertedObjectsCount += 1
+            context.saveWithGroup(group, maxChangedObjectsCount: 500, onError: {
+                self.context.rollback()
+                thrownErrors.append($0)
+            })
+        }
+        usleep(500_000) // TODO: WIP
+        XCTAssertEqual(thrownErrors.count, 2)
+        XCTAssertEqual(self.context.saveCallsCount, 2)
+        XCTAssertEqual(self.context.savesCount, 0)
+        XCTAssertEqual(self.context.rollbacksCount, 2)
+    }
 }
