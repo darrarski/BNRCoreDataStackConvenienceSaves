@@ -51,7 +51,12 @@ public extension NSManagedObjectContext {
         }
     }
     
-    private var changedObjectsCount: Int {
+    /**
+     Returns sum of inserted, updated and deleted objects counts
+     
+     returns: `Int`: Changed objects count
+     */
+    var changedObjectsCount: Int {
         return insertedObjects.count + updatedObjects.count + deletedObjects.count
     }
     
