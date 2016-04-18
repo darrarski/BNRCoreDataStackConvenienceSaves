@@ -57,7 +57,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
         context.shouldThrowOnSave = false
         let group = dispatch_group_create()
         for _ in 1...3 {
-            context.fakeHasChangesOnce = true
+            context.fakeInsertedObjectsCount += 1
             context.saveOrRollbackWithGroup(group, onError: {
                 XCTFail("Error: \($0)")
             })
@@ -73,7 +73,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
         var thrownError: ErrorType?
         let group = dispatch_group_create()
         for _ in 1...3 {
-            context.fakeHasChangesOnce = true
+            context.fakeInsertedObjectsCount += 1
             context.saveOrRollbackWithGroup(group, onError: {
                 thrownError = $0
             })

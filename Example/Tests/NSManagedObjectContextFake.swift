@@ -6,15 +6,24 @@ import CoreData
 
 class NSManagedObjectContextFake: NSManagedObjectContext {
     var fakeHasChanges = false
-    var fakeHasChangesOnce = false
     var shouldThrowOnSave = false
+    var fakeInsertedObjectsCount = 0
+    var fakeUpdatedObjectsCount = 0
+    var fakeDeletedObjectsCount = 0
     
     private(set) var saveCallsCount = 0
     private(set) var savesCount = 0
     private(set) var rollbacksCount = 0
     
     override var hasChanges: Bool {
-        return fakeHasChanges || fakeHasChangesOnce
+        guard fakeInsertedObjectsCount == 0 else { return true }
+        guard fakeUpdatedObjectsCount == 0 else { return true }
+        guard fakeDeletedObjectsCount == 0 else { return true }
+        return fakeHasChanges
+    }
+    
+    private var changedObjectsCount: Int {
+        return fakeInsertedObjectsCount + fakeUpdatedObjectsCount + fakeDeletedObjectsCount
     }
     
     override func save() throws {
@@ -23,12 +32,17 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
             throw NSError(domain: "FakeError", code: 0, userInfo: nil)
         }
         savesCount += 1
-        fakeHasChangesOnce = false
+        resetFakeModifiedObjectsCount()
     }
     
     override func rollback() {
         rollbacksCount += 1
-        fakeHasChanges = false
-        fakeHasChangesOnce = false
+        resetFakeModifiedObjectsCount()
+    }
+    
+    private func resetFakeModifiedObjectsCount() {
+        fakeInsertedObjectsCount = 0
+        fakeUpdatedObjectsCount = 0
+        fakeDeletedObjectsCount = 0
     }
 }
