@@ -1,0 +1,8 @@
+use_frameworks!
+
+
+target 'BNRCoreDataStackConvenienceSaves_Tests', :exclusive => true do
+  pod 'BNRCoreDataStackConvenienceSaves', :path => '../'
+
+  
+end
