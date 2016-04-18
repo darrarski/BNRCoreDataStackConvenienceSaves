@@ -36,6 +36,7 @@ public extension NSManagedObjectContext {
      */
     public func saveOrRollbackWithGroup(group: dispatch_group_t, maxChangedObjectsCount: Int = 100, onError: (ErrorType) -> ()) {
         guard changedObjectsCount < maxChangedObjectsCount else {
+            guard self.hasChanges else { return }
             do { try saveOrRollback() }
             catch { onError(error) }
             return
