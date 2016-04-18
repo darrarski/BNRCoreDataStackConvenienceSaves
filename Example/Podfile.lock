@@ -1,0 +1,17 @@
+PODS:
+  - BNRCoreDataStack (1.2.2)
+  - BNRCoreDataStackConvenienceSaves (0.1.0):
+    - BNRCoreDataStack (~> 1.2)
+
+DEPENDENCIES:
+  - BNRCoreDataStackConvenienceSaves (from `../`)
+
+EXTERNAL SOURCES:
+  BNRCoreDataStackConvenienceSaves:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BNRCoreDataStack: 7eb40c619f517ac4cabcacbd5ab4715f649368a1
+  BNRCoreDataStackConvenienceSaves: 54e90e3fbb1e3db78bc80167af1fce0b1cda938a
+
+COCOAPODS: 0.39.0
