@@ -15,7 +15,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        context = NSManagedObjectContextFake()
+        context = NSManagedObjectContextFake(concurrencyType: .PrivateQueueConcurrencyType)
     }
     
     override func tearDown() {
@@ -51,5 +51,20 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
         XCTAssertEqual(context.saveCallsCount, 1)
         XCTAssertEqual(context.savesCount, 0)
         XCTAssertEqual(context.rollbacksCount, 1)
+    }
+    
+    func testShouldSaveOnceWithinGroup() {
+        context.shouldThrowOnSave = false
+        context.fakeHasChanges = true
+        let group = dispatch_group_create()
+        for _ in 0...3 {
+            context.saveOrRollbackWithGroup(group, onError: {
+                XCTFail("Error: \($0)")
+            })
+        }
+        sleep(5) // TODO: WIP
+        XCTAssertEqual(self.context.saveCallsCount, 1)
+        XCTAssertEqual(self.context.savesCount, 1)
+        XCTAssertEqual(self.context.rollbacksCount, 0)
     }
 }
