@@ -42,17 +42,23 @@ public extension NSManagedObjectContext {
         }
         let queue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)
         dispatch_group_notify(group, queue) {
-            dispatch_group_enter(group)
-            self.performBlock {
+            self.performBlockWithGroup(group) {
                 guard self.hasChanges else { return }
                 do { try self.saveOrRollback() }
                 catch { onError(error) }
-                dispatch_group_leave(group)
             }
         }
     }
     
     private var changedObjectsCount: Int {
         return insertedObjects.count + updatedObjects.count + deletedObjects.count
+    }
+    
+    private func performBlockWithGroup(group: dispatch_group_t, block: () -> ()) {
+        dispatch_group_enter(group)
+        performBlock {
+            block()
+            dispatch_group_leave(group)
+        }
     }
 }
