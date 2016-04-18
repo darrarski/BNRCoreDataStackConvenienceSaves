@@ -7,11 +7,11 @@
 
 ## Info
 
-BNRCoreDataStackConvenienceUpdates is an Add On to the [BNRCoreDataStack](https://github.com/bignerdranch/CoreDataStack) library. It adds several methods to the [CoreDataModelable](Pod/CoreDataModelable.swift) protocol that makes saving contexts easier.
+BNRCoreDataStackConvenienceSaves is an Add On to the [BNRCoreDataStack](https://github.com/bignerdranch/CoreDataStack) library. It adds [convenience extension](BNRCoreDataStackConvenienceSaves/NSManagedObjectContext+ConvenienceSaves.swift) to `NSManagedObjectContext`that makes saving contexts easier.
 
 ## Usage
 
-See [test](Example/Tests/CoreDataModelableTests.swift) for example usage.
+See [tests](Example/Tests/NSManagedObjectContext+ConvenienceSavesTests.swift) for example usage.
 
 ## Requirements
 
