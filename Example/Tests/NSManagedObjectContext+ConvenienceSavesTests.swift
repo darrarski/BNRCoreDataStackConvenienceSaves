@@ -56,13 +56,13 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
     func testShouldSaveOnceWithinGroup() {
         context.shouldThrowOnSave = false
         let group = dispatch_group_create()
-        for _ in 1...3 {
+        for _ in 1...1000 {
             context.fakeInsertedObjectsCount += 1
-            context.saveOrRollbackWithGroup(group, onError: {
+            context.saveOrRollbackWithGroup(group, maxChangedObjectsCount: 1000, onError: {
                 XCTFail("Error: \($0)")
             })
         }
-        sleep(1) // TODO: WIP
+        usleep(500_000) // TODO: WIP
         XCTAssertEqual(self.context.saveCallsCount, 1)
         XCTAssertEqual(self.context.savesCount, 1)
         XCTAssertEqual(self.context.rollbacksCount, 0)
@@ -70,16 +70,16 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
     
     func testShouldRollbackOnceWithinGroup() {
         context.shouldThrowOnSave = true
-        var thrownError: ErrorType?
+        var thrownErrors = [ErrorType]()
         let group = dispatch_group_create()
-        for _ in 1...3 {
+        for _ in 1...1000 {
             context.fakeInsertedObjectsCount += 1
-            context.saveOrRollbackWithGroup(group, onError: {
-                thrownError = $0
+            context.saveOrRollbackWithGroup(group, maxChangedObjectsCount: 1000, onError: {
+                thrownErrors.append($0)
             })
         }
-        sleep(1) // TODO: WIP
-        XCTAssertNotNil(thrownError)
+        usleep(500_000) // TODO: WIP
+        XCTAssertEqual(thrownErrors.count, 1)
         XCTAssertEqual(self.context.saveCallsCount, 1)
         XCTAssertEqual(self.context.savesCount, 0)
         XCTAssertEqual(self.context.rollbacksCount, 1)
