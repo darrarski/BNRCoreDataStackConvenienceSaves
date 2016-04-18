@@ -55,9 +55,9 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
     
     func testShouldSaveOnceWithinGroup() {
         context.shouldThrowOnSave = false
-        context.fakeHasChanges = true
         let group = dispatch_group_create()
         for _ in 1...3 {
+            context.fakeHasChangesOnce = true
             context.saveOrRollbackWithGroup(group, onError: {
                 XCTFail("Error: \($0)")
             })
