@@ -62,7 +62,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 XCTFail("Error: \($0)")
             })
         }
-        usleep(500_000) // TODO: WIP
+        usleep(500_000)
         XCTAssertEqual(self.context.saveCallsCount, 1)
         XCTAssertEqual(self.context.savesCount, 1)
         XCTAssertEqual(self.context.rollbacksCount, 0)
@@ -78,7 +78,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 thrownErrors.append($0)
             })
         }
-        usleep(500_000) // TODO: WIP
+        usleep(500_000)
         XCTAssertEqual(thrownErrors.count, 1)
         XCTAssertEqual(self.context.saveCallsCount, 1)
         XCTAssertEqual(self.context.savesCount, 0)
@@ -94,7 +94,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 XCTFail("Error: \($0)")
             })
         }
-        usleep(500_000) // TODO: WIP
+        usleep(500_000)
         XCTAssertEqual(self.context.saveCallsCount, 2)
         XCTAssertEqual(self.context.savesCount, 2)
         XCTAssertEqual(self.context.rollbacksCount, 0)
@@ -110,7 +110,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 thrownErrors.append($0)
             })
         }
-        usleep(500_000) // TODO: WIP
+        usleep(500_000)
         XCTAssertEqual(thrownErrors.count, 2)
         XCTAssertEqual(self.context.saveCallsCount, 2)
         XCTAssertEqual(self.context.savesCount, 0)
@@ -128,7 +128,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 thrownErrors.append($0)
             })
         }
-        usleep(500_000) // TODO: WIP
+        usleep(500_000)
         XCTAssertEqual(thrownErrors.count, 2)
         XCTAssertEqual(self.context.saveCallsCount, 2)
         XCTAssertEqual(self.context.savesCount, 0)
@@ -145,7 +145,7 @@ class NSManagedObjectContextConvenienceSavesTests: XCTestCase {
                 thrownErrors.append($0)
             })
         }
-        usleep(500_000) // TODO: WIP
+        usleep(500_000)
         XCTAssertEqual(thrownErrors.count, 1)
         XCTAssertEqual(self.context.saveCallsCount, 2)
         XCTAssertEqual(self.context.savesCount, 1)
