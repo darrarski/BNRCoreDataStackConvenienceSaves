@@ -7,6 +7,7 @@ import CoreData
 class NSManagedObjectContextFake: NSManagedObjectContext {
     var fakeHasChanges = false
     var shouldThrowOnSave = false
+    var shouldThrowOnSaveOnce = false
     var fakeInsertedObjectsCount = 0
     var fakeUpdatedObjectsCount = 0
     var fakeDeletedObjectsCount = 0
@@ -28,7 +29,8 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
     
     override func save() throws {
         saveCallsCount += 1
-        if shouldThrowOnSave {
+        if shouldThrowOnSave || shouldThrowOnSaveOnce {
+            shouldThrowOnSaveOnce = false
             throw NSError(domain: "FakeError", code: 0, userInfo: nil)
         }
         usleep(250_000) // TODO: WIP
