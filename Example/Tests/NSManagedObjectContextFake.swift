@@ -33,13 +33,13 @@ class NSManagedObjectContextFake: NSManagedObjectContext {
             shouldThrowOnSaveOnce = false
             throw NSError(domain: "FakeError", code: 0, userInfo: nil)
         }
-        usleep(250_000)
+        usleep(200_000)
         savesCount += 1
         resetFakeModifiedObjectsCount()
     }
     
     override func rollback() {
-        usleep(250_000)
+        usleep(200_000)
         rollbacksCount += 1
         resetFakeModifiedObjectsCount()
     }
